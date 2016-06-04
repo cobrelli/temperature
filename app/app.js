@@ -1,5 +1,7 @@
-console.log('loaded');
 var d3 = require('d3');
-var socket = require('socket.io-client');
-console.log(d3);
-console.log(socket);
+var io = require('socket.io-client');
+var socket = io.connect('http://0.0.0.0:8080');
+
+socket.on('newTemp', function (temp) {
+    console.log('got new temp', temp);
+});
