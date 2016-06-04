@@ -28,4 +28,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-webpack');
 
   grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('build', ['webpack:build']);
 };
