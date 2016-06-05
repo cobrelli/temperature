@@ -53,9 +53,15 @@ svg.append("g")
 
 // Update x axis every 5 seconds
 setInterval(function() {
+    // Update x domain
     x.domain([new Date(Date.now() - 1000 * 60 * 30), new Date()])
+    // Update x axis
     svg.selectAll(".x.axis")
         .call(xAxis);
+    // Update temp dots
+    svg.selectAll('.dot')
+        .attr("cx", function(d) { return x(d.time); })
+        .attr("cy", function(d) { return y(d.temp); });
 }, 5000);
 
 var enteringTemps = svg.selectAll(".dot")
