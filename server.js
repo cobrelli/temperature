@@ -13,6 +13,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Routes
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/index.html'));
 });
@@ -25,9 +26,11 @@ app.post('/temp/', function (req, res) {
     }); 
 });
 
+// Start server
 console.log('Server listening at: localhost:8080');
 server.listen(8080)
 
+// Socket.io handling
 io.on('connection', function (socket) {
     users[socket.id] = socket;
     
