@@ -14,6 +14,7 @@ socket.on('newTemp', function (temp) {
     }
 
     temps.push(time);
+    render();
 });
 
 var margin = { top: 20, right: 20, bottom: 30, left: 50 },
@@ -51,8 +52,8 @@ svg.append("g")
     .attr("class", "y axis")
     .call(yAxis);
 
-// Update x axis every 5 seconds
-setInterval(function() {
+// Update x axis every second
+setInterval(function () {
     // Update x domain
     x.domain([new Date(Date.now() - 1000 * 60 * 30), new Date()])
     // Update x axis
@@ -60,17 +61,21 @@ setInterval(function() {
         .call(xAxis);
     // Update temp dots
     svg.selectAll('.dot')
-        .attr("cx", function(d) { return x(d.time); })
-        .attr("cy", function(d) { return y(d.temp); });
-}, 5000);
+        .attr("cx", function (d) { return x(d.time); })
+        .attr("cy", function (d) { return y(d.temp); });
+}, 1000);
 
-var enteringTemps = svg.selectAll(".dot")
-    .data(temps);
+function render() {
+    var enteringTemps = svg.selectAll(".dot")
+        .data(temps);
 
-enteringTemps.enter().append("circle")
-    .attr("class", "dot")
-    .attr("r", 3.5)
-    .attr("cx", function(d) { return x(d.time); })
-    .attr("cy", function(d) { return y(d.temp); });
+    enteringTemps.enter().append("circle")
+        .attr("class", "dot")
+        .attr("r", 3.5)
+        .attr("cx", function (d) { return x(d.time); })
+        .attr("cy", function (d) { return y(d.temp); });
 
-enteringTemps.exit().remove();
+    enteringTemps.exit().remove();
+}
+
+render();
