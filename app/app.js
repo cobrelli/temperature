@@ -2,18 +2,17 @@ var d3 = require('d3');
 var io = require('socket.io-client');
 var socket = io.connect('http://0.0.0.0:8080');
 
-// Data, add mock data
-var temps = [{ time: new Date(Date.now() - 1000 * 60 * 15), temp: 3 }, { time: new Date(), temp: 4 }]
+var temps = []
 
 socket.on('newTemp', function (temp) {
-    console.log('got new temp', temp);
+    temps.push(temp);
+    render();
+});
 
-    var time = {
-        time: new Date(),
-        temp: temp
-    }
-
-    temps.push(time);
+socket.on('initialTemps', function (initialTemps) {
+    initialTemps.forEach(function (temp) {
+        temps.push(temp);
+    });
     render();
 });
 
@@ -61,7 +60,7 @@ setInterval(function () {
         .call(xAxis);
     // Update temp dots
     svg.selectAll('.dot')
-        .attr("cx", function (d) { return x(d.time); })
+        .attr("cx", function (d) { return x(new Date(d.time)); })
         .attr("cy", function (d) { return y(d.temp); });
 }, 1000);
 
@@ -72,7 +71,7 @@ function render() {
     enteringTemps.enter().append("circle")
         .attr("class", "dot")
         .attr("r", 3.5)
-        .attr("cx", function (d) { return x(d.time); })
+        .attr("cx", function (d) { return x(new Date(d.time)); })
         .attr("cy", function (d) { return y(d.temp); });
 
     enteringTemps.exit().remove();

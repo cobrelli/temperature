@@ -1,0 +1,4 @@
+var config = {}
+config.psql = 'postgres://username:password@localhost/database'
+
+module.exports = config;
