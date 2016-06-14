@@ -1,6 +1,6 @@
 var d3 = require('d3');
 var io = require('socket.io-client');
-var socket = io.connect('http://0.0.0.0:8080');
+var socket = io.connect();
 
 var temps = []
 
@@ -70,7 +70,7 @@ function render() {
 
     enteringTemps.enter().append("circle")
         .attr("class", "dot")
-        .attr("r", 3.5)
+        .attr("r", 1)
         .attr("cx", function (d) { return x(new Date(d.time)); })
         .attr("cy", function (d) { return y(d.temp); });
 
