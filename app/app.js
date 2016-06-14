@@ -30,25 +30,25 @@ var y = d3.scale.linear()
 
 var xAxis = d3.svg.axis()
     .scale(x)
-    .orient("bottom");
+    .orient('bottom');
 
 var yAxis = d3.svg.axis()
     .scale(y)
-    .orient("left");
+    .orient('left');
 
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var svg = d3.select('body').append('svg')
+    .attr('width', width + margin.left + margin.right)
+    .attr('height', height + margin.top + margin.bottom)
+    .append('g')
+    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
+svg.append('g')
+    .attr('class', 'x axis')
+    .attr('transform', 'translate(0,' + height + ')')
     .call(xAxis);
 
-svg.append("g")
-    .attr("class", "y axis")
+svg.append('g')
+    .attr('class', 'y axis')
     .call(yAxis);
 
 // Update x axis every second
@@ -56,23 +56,23 @@ setInterval(function () {
     // Update x domain
     x.domain([new Date(Date.now() - 1000 * 60 * 30), new Date()])
     // Update x axis
-    svg.selectAll(".x.axis")
+    svg.selectAll('.x.axis')
         .call(xAxis);
     // Update temp dots
     svg.selectAll('.dot')
-        .attr("cx", function (d) { return x(new Date(d.time)); })
-        .attr("cy", function (d) { return y(d.temp); });
+        .attr('cx', function (d) { return x(new Date(d.time)); })
+        .attr('cy', function (d) { return y(d.temp); });
 }, 1000);
 
 function render() {
-    var enteringTemps = svg.selectAll(".dot")
+    var enteringTemps = svg.selectAll('.dot')
         .data(temps);
 
-    enteringTemps.enter().append("circle")
-        .attr("class", "dot")
-        .attr("r", 1)
-        .attr("cx", function (d) { return x(new Date(d.time)); })
-        .attr("cy", function (d) { return y(d.temp); });
+    enteringTemps.enter().append('circle')
+        .attr('class', 'dot')
+        .attr('r', 1)
+        .attr('cx', function (d) { return x(new Date(d.time)); })
+        .attr('cy', function (d) { return y(d.temp); });
 
     enteringTemps.exit().remove();
 }
