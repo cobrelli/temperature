@@ -1,5 +1,5 @@
-var d3 = require('d3');
-var io = require('socket.io-client');
+import d3 from 'd3';
+import io from 'socket.io-client';
 var socket = io.connect();
 
 var temps = []
