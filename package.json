@@ -12,16 +12,16 @@
   "dependencies": {
     "d3": "^3.5.17",
     "express": "^4.13.4",
-    "grunt": "^1.0.1",
-    "grunt-contrib-jshint": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-webpack": "^1.0.11",
     "jquery": "^2.2.4",
     "lodash": "^4.13.1",
     "pg": "^4.5.6",
     "socket.io": "^1.4.6"
   },
   "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-webpack": "^1.0.11",
     "grunt-execute": "^0.2.2",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
