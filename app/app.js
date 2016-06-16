@@ -5,15 +5,13 @@ var socket = io.connect();
 var temps = []
 var TIMESCALE_RANGE = 1000 * 60 * 30; // 30 minutes
 
-socket.on('newTemp', function (temp) {
+socket.on('newTemp', (temp) => {
     temps.push(temp);
     render();
 });
 
-socket.on('initialTemps', function (initialTemps) {
-    initialTemps.forEach(function (temp) {
-        temps.push(temp);
-    });
+socket.on('initialTemps', (initialTemps) => {
+    initialTemps.forEach((temp) => temps.push(temp));
     render();
 });
 
@@ -53,7 +51,7 @@ svg.append('g')
     .call(yAxis);
 
 // Update x axis every second
-setInterval(function () {
+setInterval(() => {
     // Update x domain
     x.domain([new Date(Date.now() - TIMESCALE_RANGE), new Date()])
     // Update x axis
@@ -61,19 +59,19 @@ setInterval(function () {
         .call(xAxis);
     // Update temp dots
     svg.selectAll('.dot')
-        .attr('cx', function (d) { return x(new Date(d.time)); })
-        .attr('cy', function (d) { return y(d.temp); });
+        .attr('cx', (d) => x(new Date(d.time)))
+        .attr('cy', (d) => y(d.temp));
 }, 1000);
 
-function render() {
+var render = () => {
     var enteringTemps = svg.selectAll('.dot')
         .data(temps);
 
     enteringTemps.enter().append('circle')
         .attr('class', 'dot')
         .attr('r', 1)
-        .attr('cx', function (d) { return x(new Date(d.time)); })
-        .attr('cy', function (d) { return y(d.temp); });
+        .attr('cx', (d) => x(new Date(d.time)))
+        .attr('cy', (d) => y(d.temp));
 
     enteringTemps.exit().remove();
 }
