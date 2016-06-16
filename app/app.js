@@ -42,11 +42,13 @@ var svg = d3.select('body').append('svg')
     .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
+// Draw X axis
 svg.append('g')
     .attr('class', 'x axis')
     .attr('transform', 'translate(0,' + height + ')')
     .call(xAxis);
 
+// Draw Y axis
 svg.append('g')
     .attr('class', 'y axis')
     .call(yAxis);
@@ -67,16 +69,17 @@ setInterval(() => {
 var render = () => {
     var tempDots = svg.selectAll('.dot').data(temps, (d) => d.time);
 
+    // Update selections
     svg.selectAll('.dot')
         .attr('cx', (d) => x(new Date(d.time)))
         .attr('cy', (d) => y(d.temp));
-
+    // Enter Selection
     tempDots.enter().append('circle')
         .attr('class', 'dot')
         .attr('r', 1)
         .attr('cx', (d) => x(new Date(d.time)))
         .attr('cy', (d) => y(d.temp));
-
+    // Exit Selection
     tempDots.exit().remove();
 }
 
