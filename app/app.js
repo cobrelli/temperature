@@ -1,9 +1,10 @@
 import d3 from 'd3';
 import io from 'socket.io-client';
-var socket = io.connect();
+import _ from 'lodash'
 
-var temps = []
+var socket = io.connect();
 var TIMESCALE_RANGE = 1000 * 60 * 30; // 30 minutes
+var temps = []
 
 socket.on('newTemp', (temp) => {
     temps.push(temp);
@@ -52,28 +53,31 @@ svg.append('g')
 
 // Update x axis every second
 setInterval(() => {
+    var removed = _.remove(temps, (t) => new Date(t.time).getTime() < new Date(Date.now() - TIMESCALE_RANGE).getTime());
+
     // Update x domain
-    x.domain([new Date(Date.now() - TIMESCALE_RANGE), new Date()])
+    x.domain([new Date(Date.now() - TIMESCALE_RANGE), new Date()]);
     // Update x axis
     svg.selectAll('.x.axis')
         .call(xAxis);
-    // Update temp dots
-    svg.selectAll('.dot')
-        .attr('cx', (d) => x(new Date(d.time)))
-        .attr('cy', (d) => y(d.temp));
+    // Run selections
+    render();
 }, 1000);
 
 var render = () => {
-    var enteringTemps = svg.selectAll('.dot')
-        .data(temps);
+    var tempDots = svg.selectAll('.dot').data(temps, (d) => d.time);
 
-    enteringTemps.enter().append('circle')
+    svg.selectAll('.dot')
+        .attr('cx', (d) => x(new Date(d.time)))
+        .attr('cy', (d) => y(d.temp));
+
+    tempDots.enter().append('circle')
         .attr('class', 'dot')
         .attr('r', 1)
         .attr('cx', (d) => x(new Date(d.time)))
         .attr('cy', (d) => y(d.temp));
 
-    enteringTemps.exit().remove();
+    tempDots.exit().remove();
 }
 
 render();
