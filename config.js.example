@@ -1,4 +1,5 @@
 var config = {}
-config.psql = 'postgres://username:password@localhost/database'
-
+config.psql = 'postgres://username:password@localhost/database';
+config.port = 8080;
+config.token = 'token';
 module.exports = config;

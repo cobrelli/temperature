@@ -44,6 +44,11 @@ app.get('/', function (req, res) {
 
 app.post('/temp/', function (req, res) {
     console.log('got new temp', req.body.temp);
+    if (req.body.token !== config.token) {
+        res.send('Incorrect access token');
+        return;
+    }
+    
     var temp = {
         time: new Date(),
         temp: parseInt(req.body.temp)
@@ -54,6 +59,7 @@ app.post('/temp/', function (req, res) {
     _.keys(users).forEach(function (userId) {
         users[userId].emit('newTemp', temp);    
     });
+    res.send('Temp: ' + temp.temp);
 });
 
 // Start server
