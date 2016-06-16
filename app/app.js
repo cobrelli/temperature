@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 var socket = io.connect();
 
 var temps = []
+var TIMESCALE_RANGE = 1000 * 60 * 30; // 30 minutes
 
 socket.on('newTemp', function (temp) {
     temps.push(temp);
@@ -21,7 +22,7 @@ var margin = { top: 20, right: 20, bottom: 30, left: 50 },
     height = 300 - margin.top - margin.bottom;
 
 var x = d3.time.scale()
-    .domain([new Date(Date.now() - 1000 * 60 * 30), new Date()])
+    .domain([new Date(Date.now() - TIMESCALE_RANGE), new Date()])
     .range([0, width]);
 
 var y = d3.scale.linear()
@@ -54,7 +55,7 @@ svg.append('g')
 // Update x axis every second
 setInterval(function () {
     // Update x domain
-    x.domain([new Date(Date.now() - 1000 * 60 * 30), new Date()])
+    x.domain([new Date(Date.now() - TIMESCALE_RANGE), new Date()])
     // Update x axis
     svg.selectAll('.x.axis')
         .call(xAxis);
