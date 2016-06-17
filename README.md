@@ -11,9 +11,8 @@ raspberry pi which in turn sends it to server. Data is displayed on client using
   Todo (web):
   - Implement build with minification and vendor split
   - Improve temperature chart:
-    - Remove old tasks
-    - Stop tasks from going outside chart
     - Rework temp range (maybe dynamic)
+    - Tooltips?
   - Add client framework (React?)
   - Split code to smaller components: routes, socket etc.
   - Improve file structure
@@ -23,3 +22,6 @@ raspberry pi which in turn sends it to server. Data is displayed on client using
   
   Todo (Arduino & raspbi):
   - Add more sensors?
+  
+  Other
+  - Vagrant and dockerisation?
