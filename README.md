@@ -19,7 +19,6 @@ raspberry pi which in turn sends it to server. Data is displayed on client using
   - Add additional information: all-time high, current temp etc?
   - Add tests?
   - Add linting
-  - Promisify server & db connections / queries
   - Use jsonb and store temps as objects to db?
   
   Todo (Arduino & raspbi):
