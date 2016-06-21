@@ -18,7 +18,7 @@ module.exports = function (grunt) {
             build: {
                 entry: './app/app.js',
                 output: {
-                    path: 'public',
+                    path: 'dist',
                     filename: 'build.js'
                 },
                 module: {
@@ -39,6 +39,14 @@ module.exports = function (grunt) {
             target: {
                 src: ['server.js']
             }
+        },
+        copy: {
+            main: {
+                files: [
+                    { expand: true, flatten: true, src: ['app/styles/*.css'], dest: 'dist/styles/' },
+                    { expand: true, flatten: true, src: ['app/index.html'], dest: 'dist/' }
+                ]
+            }
         }
     });
 
@@ -46,8 +54,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-webpack');
     grunt.loadNpmTasks('grunt-execute');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     grunt.registerTask('default', ['jshint']);
-    grunt.registerTask('build', ['webpack:build']);
-    grunt.registerTask('serve', ['webpack:build', 'execute']);
+    grunt.registerTask('build', ['webpack:build', 'copy']);
+    grunt.registerTask('serve', ['webpack:build', 'copy', 'execute']);
 };

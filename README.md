@@ -15,7 +15,6 @@ raspberry pi which in turn sends it to server. Data is displayed on client using
     - Tooltips?
   - Add client framework (React?)
   - Split code to smaller components: routes, socket etc.
-  - Improve file structure
   - Add additional information: all-time high, current temp etc?
   - Add tests?
   - Add linting

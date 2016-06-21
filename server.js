@@ -29,13 +29,13 @@ function runQuery(queryString, params, callback) {
     });
 }
 
-app.use(express.static('public'));
+app.use(express.static('dist'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Routes
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + '/public/index.html'));
+    res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
 app.post('/temp/', function (req, res) {
