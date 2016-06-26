@@ -1,0 +1,12 @@
+db:  
+  image: postgres
+dev2:  
+  build: .
+  ports:
+    - '8080:8080'
+  links:
+    - db
+  environment:
+    - PGHOST=db
+    - PGUSER=postgres
+    - DATABASE_URL=postgres://db:5432
