@@ -1,5 +1,8 @@
 db:  
   image: postgres
+  environment:
+    - POSTGRES_USER=temp 
+    - POSTGRES_PASSWORD=temp
 dev2:  
   build: .
   ports:
@@ -8,5 +11,4 @@ dev2:
     - db
   environment:
     - PGHOST=db
-    - PGUSER=postgres
-    - DATABASE_URL=postgres://db:5432
+    - DATABASE_URL=postgres://temp:temp@db:5432/temp
