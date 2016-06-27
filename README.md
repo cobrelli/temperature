@@ -23,5 +23,12 @@ raspberry pi which in turn sends it to server. Data is displayed on client using
   Todo (Arduino & raspbi):
   - Add more sensors?
   
-  Other
-  - Vagrant and dockerisation?
+  Todo docker & build
+  - Setup build with travis
+  - Add separate script for restarting web 
+    + rename build to build_containers, start to run_containers?
+    + update.sh for rebuilding web?
+  
+  How to run:
+  - Build containers with build.sh
+  - Start server and db with start.sh
