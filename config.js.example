@@ -1,5 +1,5 @@
-var config = {}
-config.psql = process.env.DATABASE_URL;
-config.port = 8080;
-config.token = 'token';
-module.exports = config;
+module.exports = {
+    psql: process.env.DATABASE_URL,
+    port: 8080,
+    token: 'token
+};
